@@ -2,7 +2,7 @@ var mongoose = require("mongoose");
 var db = require("../models");
 
 mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost/webpackplugin",
+  process.env.MONGODB_URI || "mongodb://localhost/audiodb",
   { useNewUrlParser: true }
 );
 
