@@ -23,7 +23,7 @@ function audioTest(option) {
             channelCount: answers.channelCount,
             sampleFormat: portAudio.SampleFormat16Bit,
             sampleRate: 48000,
-            deviceId: -1, // Use -1 or omit the deviceId to select the default device
+            deviceId: 0, // Use -1 or omit the deviceId to select the default device
             closeOnError: true // Close the stream if an audio error is detected, if set false then just log the error
           }
         });
