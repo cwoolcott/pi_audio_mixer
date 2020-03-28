@@ -35,6 +35,25 @@ function audioTest(option) {
         menu();
       });
   }
+  else if (option === 'Audio IO') {
+    // Create an instance of AudioIO with inOptions and outOptions, which will return a DuplexStream
+    var aio = new portAudio.AudioIO({
+      inOptions: {
+        channelCount: 2,
+        sampleFormat: portAudio.SampleFormat16Bit,
+        sampleRate: 44100,
+        deviceId: -1 // Use -1 or omit the deviceId to select the default device
+      },
+      outOptions: {
+        channelCount: 2,
+        sampleFormat: portAudio.SampleFormat16Bit,
+        sampleRate: 44100,
+        deviceId: -1 // Use -1 or omit the deviceId to select the default device
+      }
+    });
+
+    aio.start();
+  }
 }
 
 function menu() {
@@ -45,7 +64,7 @@ function menu() {
         type: 'list',
         name: 'option',
         message: 'TESTING:',
-        choices: ['Get Audio Device', 'Play Audio', 'Exit'],
+        choices: ['Get Audio Device', 'Play Audio', 'Audio IO', 'Exit'],
       },
     ])
     .then(answers => {
