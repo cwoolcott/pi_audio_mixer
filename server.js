@@ -1,28 +1,56 @@
-var express = require("express");
-var mongoose = require("mongoose");
+const inquirer = require('inquirer');
+const portAudio = require('naudiodon');
+const fs = require('fs');
 
-require('dotenv').config()
+function audioTest(option) {
+  console.log(option)
+  if (option === 'Get Audio Device') {
+    console.log(portAudio.getDevices());
+    menu();
+  }
+  else if (option === 'Play Audio') {
 
-var app = express();
-var PORT = process.env.PORT || 3000;
+    inquirer
+      .prompt([
+        {
+          name: 'channelCount',
+          message: 'Channel Count (#)'
+        },
+      ])
+      .then(answers => {
+        var ao = new portAudio.AudioIO({
+          outOptions: {
+            channelCount: answers.channelCount,
+            sampleFormat: portAudio.SampleFormat16Bit,
+            sampleRate: 48000,
+            deviceId: -1, // Use -1 or omit the deviceId to select the default device
+            closeOnError: true // Close the stream if an audio error is detected, if set false then just log the error
+          }
+        });
 
-var portAudio = require('naudiodon');
-console.log(portAudio.getDevices());
+        var rs = fs.createReadStream('samples/cantina.wav');
+        // Start piping data and start streaming
+        rs.pipe(ao);
+        ao.start();
+        menu();
+      });
+  }
+}
 
-app.use(express.static("public"));
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+function menu() {
 
-require("./routes/apiRoutes")(app);
-require("./routes/htmlRoutes")(app);
+  inquirer
+    .prompt([
+      {
+        type: 'list',
+        name: 'option',
+        message: 'TESTING:',
+        choices: ['Get Audio Device', 'Play Audio', 'Exit'],
+      },
+    ])
+    .then(answers => {
+      audioTest(answers.option);
+    });
+}
 
-mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost/audiodb",
-  { useNewUrlParser: true }
-);
-
-app.listen(PORT, function () {
-  console.log(`Now listening on port: ${PORT}`);
-});
-
-//MONGODB_URI = 'mongodb://chrisuser:guestpass123@ds227865.mlab.com:27865/heroku_lwwghkmr'
+menu();
