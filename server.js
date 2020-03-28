@@ -6,6 +6,9 @@ require('dotenv').config()
 var app = express();
 var PORT = process.env.PORT || 3000;
 
+var portAudio = require('naudiodon');
+console.log(portAudio.getDevices());
+
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
