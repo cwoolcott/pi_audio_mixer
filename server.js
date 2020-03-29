@@ -13,17 +13,19 @@ function audioTest(option) {
     inquirer
       .prompt([
         {
-          name: 'channelCount',
-          message: 'Channel Count (#)'
+          name: 'deviceId',
+          message: 'device ID? (# -1,)'
         },
       ])
       .then(answers => {
+
+        var deviceId = answers.deviceId ? answers.deviceId : -1;
         var ao = new portAudio.AudioIO({
           outOptions: {
-            channelCount: answers.channelCount,
+            channelCount: 2,//answers.deviceId,
             sampleFormat: portAudio.SampleFormat16Bit,
             sampleRate: 48000,
-            deviceId: 0, // Use -1 or omit the deviceId to select the default device
+            deviceId: deviceId, // Use -1 or omit the deviceId to select the default device
             closeOnError: true // Close the stream if an audio error is detected, if set false then just log the error
           }
         });
