@@ -17,6 +17,29 @@ function audioTest(option) {
     hwInfo["soundCards"] = soundCards;
     console.table(hwInfo);
   }
+  else if (option === "Sound Player") {
+    // With full options
+    var soundplayer = require("sound-player");
+    var options = {
+      filename: "./samples/cantina.wav",
+      gain: 100,
+      debug: true,
+      player: "aplay", // "afplay" "aplay" "mpg123" "mpg321"
+      device: "sysdefault:CARD=audioinjectoroc"   //
+    }
+
+    var player = new soundplayer(options)
+    player.play();
+
+    player.on('complete', function () {
+      console.log('Done with playback!');
+    });
+
+    player.on('error', function (err) {
+      console.log('Error occurred:', err);
+    });
+  }
+
   else if (option === 'Play Audio') {
 
     inquirer
