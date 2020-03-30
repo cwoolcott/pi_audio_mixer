@@ -17,6 +17,16 @@ function audioTest(option) {
     hwInfo["soundCards"] = soundCards;
     console.table(hwInfo);
   }
+  else if (option === '50% Volume') {
+    let soundCards = cp.execSync("amixer set Master 50%");
+    console.table(soundCards);
+  }
+  else if (option === '100% Volume') {
+    let soundCards = cp.execSync("amixer set Master 100%");
+    console.table(soundCards);
+  }
+
+
   else if (option === "Sound Player") {
     // With full options
     var soundplayer = require("sound-player");
@@ -136,7 +146,7 @@ function menu() {
         type: 'list',
         name: 'option',
         message: 'TESTING:',
-        choices: ['Audio Mixer', 'Get Audio Device', 'Get Host', 'Load Sound Card', 'Sound Player', 'Play Audio', 'Audio IO', 'Exit'],
+        choices: ['50% Volume', '100% Volume', 'Exit'],
       },
     ])
     .then(answers => {
