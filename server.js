@@ -28,12 +28,13 @@ function audioTest(option) {
           ])
           .then(res => {
             let _volume = res.volume
-            soundCards = cp.execSync("amixer set " + _channel + " + " + _volume + "%");
-            console.log(soundCards)
+            cp.execSync("amixer set " + _channel + " + " + _volume + "%");
+            cp.execSync("amixer get " + _channel);
+            menu();
           });
       });
 
-    menu();
+
   }
 
 }
