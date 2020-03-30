@@ -39,7 +39,7 @@ function audioTest(option) {
           }
         });
 
-        var rs = fs.createReadStream('samples/cantina.wav');
+        var rs = fs.createReadStream('./samples/cantina.wav');
         // Start piping data and start streaming
         rs.pipe(ao);
         ao.start();
