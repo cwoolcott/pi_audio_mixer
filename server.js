@@ -171,7 +171,7 @@ function menu() {
         type: 'list',
         name: 'option',
         message: 'TESTING:',
-        choices: ['50% Volume', '100% Volume', 'Exit'],
+        choices: ['scontents', '50% Volume', '100% Volume', 'Exit'],
       },
     ])
     .then(answers => {
