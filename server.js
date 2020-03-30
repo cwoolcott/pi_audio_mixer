@@ -10,6 +10,8 @@ function audioTest(option) {
     menu();
   }
   else if (option === 'Load Sound Card') {
+    let hwInfo = Object.create(null);
+
     let soundCards = cp.execSync("arecord -L | grep :CARD")
       .toString('utf8').trim().split("\n");
     hwInfo["soundCards"] = soundCards;
