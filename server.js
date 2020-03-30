@@ -45,8 +45,8 @@ function audioTest(option) {
       })
 
   }
-  else if (option === 'scontents') {
-    let soundCards = cp.execSync("amixer scontents");
+  else if (option === 'scontrols') {
+    let soundCards = cp.execSync("amixer scontrols");
     console.table(soundCards);
   }
 
@@ -171,7 +171,7 @@ function menu() {
         type: 'list',
         name: 'option',
         message: 'TESTING:',
-        choices: ['scontents', '50% Volume', '100% Volume', 'Exit'],
+        choices: ['scontrols', '50% Volume', '100% Volume', 'Exit'],
       },
     ])
     .then(answers => {
