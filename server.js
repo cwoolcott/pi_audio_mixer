@@ -18,13 +18,38 @@ function audioTest(option) {
     console.table(hwInfo);
   }
   else if (option === '50% Volume') {
-    let soundCards = cp.execSync("amixer set Master 50%");
+    inquirer
+      .prompt([
+        {
+          name: 'channelName',
+          message: 'change Name?'
+        },
+      ])
+      .then(answers => {
+        let soundCards = cp.execSync("amixer set " + channelName + " + 50%");
+        console.table(soundCards);
+      })
+
+  }
+  else if (option === '50% Volume') {
+    inquirer
+      .prompt([
+        {
+          name: 'channelName',
+          message: 'change Name?'
+        },
+      ])
+      .then(answers => {
+        let soundCards = cp.execSync("amixer set " + channelName + " + 100%");
+        console.table(soundCards);
+      })
+
+  }
+  else if (option === 'scontents') {
+    let soundCards = cp.execSync("amixer scontents");
     console.table(soundCards);
   }
-  else if (option === '100% Volume') {
-    let soundCards = cp.execSync("amixer set Master 100%");
-    console.table(soundCards);
-  }
+
 
 
   else if (option === "Sound Player") {
