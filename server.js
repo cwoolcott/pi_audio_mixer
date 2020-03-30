@@ -56,6 +56,9 @@ function audioTest(option) {
 
     aio.start();
   }
+  else if (option === 'Get Host') {
+    console.log(portAudio.getHostAPIs());
+  }
 }
 
 function menu() {
@@ -66,7 +69,7 @@ function menu() {
         type: 'list',
         name: 'option',
         message: 'TESTING:',
-        choices: ['Get Audio Device', 'Play Audio', 'Audio IO', 'Exit'],
+        choices: ['Get Audio Device', 'Get Host', 'Play Audio', 'Audio IO', 'Exit'],
       },
     ])
     .then(answers => {
