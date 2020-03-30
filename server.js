@@ -101,7 +101,7 @@ function menu() {
         type: 'list',
         name: 'option',
         message: 'TESTING:',
-        choices: ['Get Audio Device', 'Get Host', 'Load Sound Card', 'Play Audio', 'Audio IO', 'Exit'],
+        choices: ['Get Audio Device', 'Get Host', 'Load Sound Card', 'Sound Player', 'Play Audio', 'Audio IO', 'Exit'],
       },
     ])
     .then(answers => {
