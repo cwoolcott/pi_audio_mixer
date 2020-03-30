@@ -1,12 +1,19 @@
 const inquirer = require('inquirer');
 const portAudio = require('naudiodon');
 const fs = require('fs');
+const cp = require("child_process");
 
 function audioTest(option) {
   console.log(option)
   if (option === 'Get Audio Device') {
     console.log(portAudio.getDevices());
     menu();
+  }
+  else if (option === 'Load Sound Card') {
+    let soundCards = cp.execSync("arecord -L | grep :CARD")
+      .toString('utf8').trim().split("\n");
+    hwInfo["soundCards"] = soundCards;
+    console.table(hwInfo);
   }
   else if (option === 'Play Audio') {
 
